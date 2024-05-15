@@ -9,11 +9,14 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.view.MotionEvent
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import com.example.testapp.Constance.ANIMATION_DURATION
+import com.example.testapp.Constance.SLEEP_HOLDER_DURATION
 import com.example.testapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private var animationUpAndDownFromFirstPosition: AnimatorSet? = null
     private var animationUpAndDown: AnimatorSet? = null
     private val sleepHandler = android.os.Handler(Looper.getMainLooper())
+    private var isSleepHandlerRunning = false
 
 
     @SuppressLint("ClickableViewAccessibility", "Recycle")
@@ -37,20 +41,36 @@ class MainActivity : AppCompatActivity() {
         bindingClass.background.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    stopAnimation(animationUpAndDownFromFirstPosition)
-                    stopAnimation(animationUpAndDown)
+
+
+                    if (!isSleepHandlerRunning) {
+                        isSleepHandlerRunning = true
+                        sleepHandler.postDelayed({
+                            textAnimation()
+                            isSleepHandlerRunning = false
+                        }, SLEEP_HOLDER_DURATION)
+                    } else {
+                        stopAnimation(animationUpAndDownFromFirstPosition)
+                        stopAnimation(animationUpAndDown)
+                        sleepHandler.removeCallbacksAndMessages(null)
+                        sleepHandler.postDelayed({
+                            textAnimation()
+                        }, SLEEP_HOLDER_DURATION)
+                    }
+
                     val x = event.x
                     val y = event.y
                     bindingClass.tvGreeting.x = x
                     bindingClass.tvGreeting.y = y
-
-                    sleepHandler.postDelayed({
-                        textAnimation()
-                    }, 5000)
                 }
             }
             true
         }
+    }
+
+    fun stopAnimationOnTextClick(view: View){
+        stopAnimation(animationUpAndDown)
+        stopAnimation(animationUpAndDownFromFirstPosition)
     }
 
     private fun textAnimation() {
@@ -63,13 +83,13 @@ class MainActivity : AppCompatActivity() {
             val topOfScreen = -verticalBias*background.height+tvGreeting.height/2.toFloat()
 
             val animationDown = ObjectAnimator.ofFloat(tvGreeting, "translationY", currentTranslationY, bottomOfScreen)
-            animationDown.duration = 3000
+            animationDown.duration = ANIMATION_DURATION
 
             val animationFromBottomToTop = ObjectAnimator.ofFloat(tvGreeting, "translationY", bottomOfScreen, topOfScreen)
-            animationFromBottomToTop.duration = 3000
+            animationFromBottomToTop.duration = ANIMATION_DURATION
 
             val animationFromTopToBottom = ObjectAnimator.ofFloat(tvGreeting, "translationY", topOfScreen, bottomOfScreen)
-            animationFromTopToBottom.duration = 3000
+            animationFromTopToBottom.duration = ANIMATION_DURATION
 
 
             animationUpAndDownFromFirstPosition = AnimatorSet()
@@ -105,4 +125,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+}
+object Constance {
+    const val ANIMATION_DURATION: Long = 3000
+    const val SLEEP_HOLDER_DURATION: Long = 5000
 }
