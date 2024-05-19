@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private var animationUpAndDown: AnimatorSet? = null
     private val sleepHandler = android.os.Handler(Looper.getMainLooper())
     private var isSleepHandlerRunning = false
+    private var animationCancelled = false
 
 
     @SuppressLint("ClickableViewAccessibility", "Recycle")
@@ -99,13 +100,25 @@ class MainActivity : AppCompatActivity() {
             animationUpAndDown = AnimatorSet()
             animationUpAndDown?.play(animationFromBottomToTop)?.before(animationFromTopToBottom)
 
-            val listenerForUpAndDownAnimation = object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    animationUpAndDown?.start()
+            val listenerForUpAndDownAnimationCancel = object : AnimatorListenerAdapter() {
+                override fun onAnimationCancel(animation: Animator) {
+                    animationCancelled = true
                 }
             }
+
+            val listenerForUpAndDownAnimation = object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    if (!animationCancelled) {
+                        animationUpAndDown?.start()
+                    }
+                    animationCancelled = false
+                }
+            }
+
             animationUpAndDownFromFirstPosition?.addListener(listenerForUpAndDownAnimation)
             animationUpAndDown?.addListener(listenerForUpAndDownAnimation)
+            animationUpAndDownFromFirstPosition?.addListener(listenerForUpAndDownAnimationCancel)
+            animationUpAndDown?.addListener(listenerForUpAndDownAnimationCancel)
 
             animationUpAndDownFromFirstPosition?.start()
         }
@@ -113,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun stopAnimation (animatorSet: AnimatorSet?){
         if (animatorSet?.isStarted == true) {
-            animatorSet.pause()
+            animatorSet.cancel()
         }
     }
 
