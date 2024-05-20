@@ -36,13 +36,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(bindingClass.root)
 
         hideSystemUI()
-        bindingClass.tvGreeting.setTextColor(ContextCompat.getColor(this, R.color.greeting_text_color))
         bindingClass.tvGreeting.text = getString(R.string.Hello).uppercase()
 
         bindingClass.background.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
 
+                    bindingClass.tvGreeting.setTextColor(ContextCompat.getColor(this, R.color.greeting_text_color))
+                    stopAnimation(animationUpAndDownFromFirstPosition)
+                    stopAnimation(animationUpAndDown)
 
                     if (!isSleepHandlerRunning) {
                         isSleepHandlerRunning = true
@@ -80,8 +82,8 @@ class MainActivity : AppCompatActivity() {
             val verticalBias = params.verticalBias
 
             val currentTranslationY = tvGreeting.translationY
-            val bottomOfScreen = background.height-tvGreeting.height/2-verticalBias*background.height.toFloat()
-            val topOfScreen = -verticalBias*background.height+tvGreeting.height/2.toFloat()
+            val bottomOfScreen = background.height-tvGreeting.height/2-verticalBias*background.height+tvGreeting.textSize
+            val topOfScreen = -verticalBias*background.height+tvGreeting.height/2-tvGreeting.textSize
 
             val animationDown = ObjectAnimator.ofFloat(tvGreeting, "translationY", currentTranslationY, bottomOfScreen)
             animationDown.duration = ANIMATION_DURATION
@@ -103,6 +105,7 @@ class MainActivity : AppCompatActivity() {
             val listenerForUpAndDownAnimationCancel = object : AnimatorListenerAdapter() {
                 override fun onAnimationCancel(animation: Animator) {
                     animationCancelled = true
+
                 }
             }
 
@@ -111,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                     if (!animationCancelled) {
                         animationUpAndDown?.start()
                     }
-                    animationCancelled = false
+                    animationCancelled=false
                 }
             }
 
