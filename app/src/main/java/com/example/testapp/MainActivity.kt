@@ -53,8 +53,6 @@ class MainActivity : AppCompatActivity() {
                             isSleepHandlerRunning = false
                         }, SLEEP_HOLDER_DURATION)
                     } else {
-                        stopAnimation(animationUpAndDownFromFirstPosition)
-                        stopAnimation(animationUpAndDown)
                         sleepHandler.removeCallbacksAndMessages(null)
                         sleepHandler.postDelayed({
                             textAnimation()
@@ -63,8 +61,19 @@ class MainActivity : AppCompatActivity() {
 
                     val x = event.x
                     val y = event.y
-                    bindingClass.tvGreeting.x = x
-                    bindingClass.tvGreeting.y = y
+
+                    bindingClass.apply {
+                        val text = tvGreeting.text.toString()
+                        val textWidth = tvGreeting.paint.measureText(text)
+
+                        if (x > background.width - textWidth) {
+                            tvGreeting.x = (background.width - textWidth - (tvGreeting.width - textWidth) / 2)
+                            tvGreeting.y = y
+                        } else {
+                            tvGreeting.x = x - (tvGreeting.width - textWidth) / 2
+                            tvGreeting.y = y - tvGreeting.textSize
+                        }
+                    }
                 }
             }
             true
