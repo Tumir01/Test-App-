@@ -10,8 +10,8 @@
 
     <TextView
         android:id="@+id/tvGreeting"
-        android:layout_width="112dp"
-        android:layout_height="58dp"
+        android:layout_width="108dp"
+        android:layout_height="54dp"
         android:gravity="center"
         android:onClick="stopAnimationOnTextClick"
         android:text="@string/Hello"

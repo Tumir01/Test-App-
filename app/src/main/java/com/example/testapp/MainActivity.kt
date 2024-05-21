@@ -143,6 +143,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 object Constance {
-    const val ANIMATION_DURATION: Long = 1000
-    const val SLEEP_HOLDER_DURATION: Long = 2000
+    const val ANIMATION_DURATION: Long = 3000
+    const val SLEEP_HOLDER_DURATION: Long = 5000
 }
