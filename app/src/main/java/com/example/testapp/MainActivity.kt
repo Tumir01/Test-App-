@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private var animationCancelled = false
 
 
+
     @SuppressLint("ClickableViewAccessibility", "Recycle")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         hideSystemUI()
         bindingClass.tvGreeting.text = getString(R.string.Hello).uppercase()
+
 
         bindingClass.background.setOnTouchListener { _, event ->
             when (event.action) {
@@ -75,6 +78,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
+
             }
             true
         }
@@ -150,7 +154,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        stopAnimation(animationUpAndDown)
+        stopAnimation(animationUpAndDownFromFirstPosition)
+        sleepHandler.removeCallbacksAndMessages(null)
+        bindingClass.tvGreeting.x = (bindingClass.background.width/2 - bindingClass.tvGreeting.width/2).toFloat()
+        bindingClass.tvGreeting.y = (bindingClass.background.height/2 - bindingClass.tvGreeting.height/2).toFloat()
+    }
 }
+
 object Constance {
     const val ANIMATION_DURATION: Long = 3000
     const val SLEEP_HOLDER_DURATION: Long = 5000
