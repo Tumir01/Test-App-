@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
 
-                    bindingClass.tvGreeting.setTextColor(ContextCompat.getColor(this, R.color.greeting_text_color))
+                    bindingClass.tvGreeting.setTextColor(ContextCompat.getColor(this, R.color.red))
                     stopAnimation(animationUpAndDownFromFirstPosition)
                     stopAnimation(animationUpAndDown)
 
@@ -68,10 +68,14 @@ class MainActivity : AppCompatActivity() {
                     bindingClass.apply {
                         val text = tvGreeting.text.toString()
                         val textWidth = tvGreeting.paint.measureText(text)
+                        val textHeight = tvGreeting.paint.fontMetrics.descent - tvGreeting.paint.fontMetrics.ascent
 
                         if (x > background.width - textWidth) {
                             tvGreeting.x = (background.width - textWidth - (tvGreeting.width - textWidth) / 2)
                             tvGreeting.y = y
+                        } else if (y > background.height - textHeight) {
+                            tvGreeting.x = x
+                            tvGreeting.y = (background.height - textHeight - (tvGreeting.height - textHeight) / 2)
                         } else {
                             tvGreeting.x = x - (tvGreeting.width - textWidth) / 2
                             tvGreeting.y = y - tvGreeting.textSize
