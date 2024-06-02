@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Test App</string>
     <string name="Hello">Hello!</string>
+    <string name="Login" translatable="false">Login</string>
+    <string name="Password" translatable="false">Password</string>
 </resources>

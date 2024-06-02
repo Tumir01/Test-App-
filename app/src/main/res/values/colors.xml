@@ -2,6 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="greeting_text_color">#FF0000</color>
+    <color name="red">#FF0000</color>
     <color name="background_gray_color">#757575</color>
+    <color name="background_login_blue_color">#003366</color>
+    <color name="login_green_color">#FF03C03C</color>
+    <color name="gray_hint_color">#808080</color>
 </resources>
