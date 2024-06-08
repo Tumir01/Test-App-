@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Test App</string>
-    <string name="Hello">Hola!</string>
+    <string name="hello">Hola!</string>
+    <string name="not_all_fields_are_filled_in">¡No todos los campos están completos!</string>
+    <string name="user_is_not_found">¡No se encuentra el usuario!</string>
+    <string name="incorrect_password">¡Contraseña incorrecta!</string>
 </resources>

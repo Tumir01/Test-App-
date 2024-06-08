@@ -7,4 +7,5 @@
     <color name="background_login_blue_color">#003366</color>
     <color name="login_green_color">#FF03C03C</color>
     <color name="gray_hint_color">#808080</color>
+    <color name="light_blue">#51AFF7</color>
 </resources>

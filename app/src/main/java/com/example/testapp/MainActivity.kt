@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(bindingClass.root)
 
         hideSystemUI()
-        bindingClass.tvGreeting.text = getString(R.string.Hello).uppercase()
+        bindingClass.tvGreeting.text = getString(R.string.hello).uppercase()
 
 
         bindingClass.background.setOnTouchListener { _, event ->

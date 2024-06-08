@@ -17,7 +17,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="170dp"
         android:fontFamily="@font/alata"
-        android:text="@string/Login"
+        android:text="@string/login"
         android:textColor="@color/login_green_color"
         android:textSize="25sp"
         android:textStyle="bold" />
@@ -30,7 +30,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/rounded_edit_text"
         android:ems="10"
-        android:hint="@string/Login"
+        android:hint="@string/login"
         android:inputType="text"
         android:padding="12dp"
         android:textColorHint="@color/gray_hint_color" />
@@ -44,7 +44,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_edit_text"
         android:ems="10"
-        android:hint="@string/Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="12dp"
         android:textColorHint="@color/gray_hint_color" />
@@ -56,7 +56,26 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:background="@drawable/rounded_button"
-        android:text="@string/Login"
+        android:text="@string/login"
         android:textColor="@color/white"
         android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewIsAlreadyRegistered"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/already_registered" />
+
+    <TextView
+        android:id="@+id/textViewIsLogin"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="@string/sign_up"
+        android:textColor="@color/light_blue" />
 </LinearLayout>
