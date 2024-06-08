@@ -14,7 +14,7 @@
         android:layout_height="54dp"
         android:gravity="center"
         android:onClick="stopAnimationOnTextClick"
-        android:text="@string/Hello"
+        android:text="@string/hello"
         android:textColor="@color/white"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"

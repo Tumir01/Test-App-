@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Test App</string>
-    <string name="Hello">Hello!</string>
-    <string name="Login" translatable="false">Login</string>
-    <string name="Password" translatable="false">Password</string>
+    <string name="hello">Hello!</string>
+    <string name="create_account" translatable="false">Create Account</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="log_in" translatable="false">Log In</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="sign_up" translatable="false">Sign Up</string>
+    <string name="already_registered" translatable="false">Already registered?</string>
+    <string name="havent_register_yet" translatable="false">Haven\'t register yet?</string>
+    <string name="not_all_fields_are_filled_in">Not all fields are filled in!</string>
+    <string name="user_is_not_found">User is not found!</string>
+    <string name="incorrect_password">Incorrect password!</string>
 </resources>
